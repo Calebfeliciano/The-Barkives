@@ -1,4 +1,4 @@
-import type { Book } from './Book';
+import type { Book } from './Pets';
 
 export interface User {
   username: string | null;
