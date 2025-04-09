@@ -19,14 +19,17 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ms-auto'>
+              <Nav.Link as={Link} to='/'>
+              Home
+              </Nav.Link>
               <Nav.Link as={Link} to='/healthcare'>
-                Healthcare
+              Healthcare
               </Nav.Link>
               <Nav.Link as={Link} to='/services'>
-                Services
+              Services
               </Nav.Link>
               <Nav.Link as={Link} to='/calendar'>
-                Calendar
+              Calendar
               </Nav.Link>
 
               {Auth.loggedIn() ? (
