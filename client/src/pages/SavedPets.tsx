@@ -11,7 +11,7 @@ import { QUERY_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
 import type { User } from '../models/User';
-import type { Book } from '../models/Book';
+import type { Book } from '../models/Pets';
 
 import Auth from '../utils/auth';
 
