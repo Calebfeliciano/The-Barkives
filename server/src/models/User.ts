@@ -1,12 +1,12 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { type IBook, bookSchema } from './Book.js';
+import { type IPet, petSchema } from './Pet.js';
 
 interface IUser extends Document {
   username: string;
   email: string;
   password: string;
-  savedBooks: IBook[];
+  savedPets: IPet[];
   isCorrectPassword(password: string): Promise<boolean>;
   bookCount: number;
 }
@@ -28,8 +28,8 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
-    savedBooks: [bookSchema],
+    // set savedPets to be an array of data that adheres to the petSchema
+    savedPets: [petSchema],
   },
   // set this to use virtual below
   {
@@ -53,12 +53,12 @@ userSchema.pre<IUser>('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
   return await bcrypt.compare(password, this.password);
 };
-
+/*
 // when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
 userSchema.virtual('bookCount').get(function (this: IUser) {
-  return this.savedBooks.length;
+  return this.savedPets.length;
 });
-
+*/
 const User = model<IUser>('User', userSchema);
 
 export default User;

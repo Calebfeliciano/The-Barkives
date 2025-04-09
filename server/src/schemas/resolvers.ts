@@ -1,6 +1,6 @@
 import type IUserContext from '../interfaces/UserContext.js';
 import type IUserDocument from '../interfaces/UserDocument.js';
-import type IBookInput from '../interfaces/BookInput.js';
+import type IPetInput from '../interfaces/PetInput.js';
 import { User } from '../models/index.js';
 import { signToken, AuthenticationError } from '../services/auth-service.js';
 
@@ -33,11 +33,11 @@ const resolvers = {
       const token = signToken(user.username, user.email, user._id);
       return { token, user };
     },
-    saveBook: async (_parent: any, { bookData }: { bookData: IBookInput }, context: IUserContext): Promise<IUserDocument | null> => {
+    savePet: async (_parent: any, { petData }: { petData: IPetInput }, context: IUserContext): Promise<IUserDocument | null> => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedBooks: bookData } },
+          { $push: { savedPets: petData } },
           { new: true }
         );
 
@@ -46,11 +46,11 @@ const resolvers = {
 
       throw new AuthenticationError('User not authenticated');
     },
-    removeBook: async (_parent: any, { bookId }: { bookId: string }, context: IUserContext): Promise<IUserDocument | null> => {
+    removePet: async (_parent: any, { petId }: { petId: string }, context: IUserContext): Promise<IUserDocument | null> => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId } } },
+          { $pull: { petsBooks: { petId } } },
           { new: true }
         );
 

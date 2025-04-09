@@ -1,9 +1,8 @@
-import type { IBook } from '../models/Book.js';
+import type { IPet } from '../models/Pet.js';
 export default interface IUserDocument {
   username: string | null;
   email: string | null;
   password: string | null;
-  savedBooks: IBook[];
+  savedPets: IPet[];
   isCorrectPassword(password: string): Promise<boolean>;
-  bookCount: number | null;
 }
