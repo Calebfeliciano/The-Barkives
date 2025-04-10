@@ -8,6 +8,9 @@ import {
   Form,
   ListGroup,
 } from 'react-bootstrap';
+=======
+import { Container, Button, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const ManagePets = () => {
   const [pets, setPets] = useState<{ name: string; type: string }[]>([]);
@@ -72,6 +75,12 @@ const ManagePets = () => {
                 Select a Pet
               </Button>
               <Button variant="primary" size="lg" onClick={handleAddPet}>
+            <Link to="/savedPets">
+                <Button variant="primary" size="lg">
+                  Select a Pet
+                </Button>
+              </Link>
+              <Button variant="primary" size="lg">
                 Add a New Pet
               </Button>
               <Button variant="primary" size="lg" onClick={handleRemovePet}>

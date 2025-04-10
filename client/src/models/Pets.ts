@@ -1,8 +1,13 @@
-export interface Book {
-  authors: string[],
-  description: string;
-  bookId: string;
-  image: string;
-  link: string;
-  title: string;
+export interface Pet {
+  name: String
+  birthdate: String
+  age: String
+  adopted: Boolean
+  adoptionDate: String
+  species: String
+  breed: String
+  color: String
+  weight: String
+  specialMarkings: String
+  specialNeeds: String
 }
