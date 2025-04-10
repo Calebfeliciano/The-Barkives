@@ -1,5 +1,5 @@
 import { Container, Button, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
 const ManagePets = () => {
   return (
     <div className="text-light bg-dark p-5 min-vh-100">
@@ -8,11 +8,9 @@ const ManagePets = () => {
         <Row className="justify-content-center">
           <Col xs={12} md={6} lg={4}>
             <div className="d-grid gap-3">
-              <Link to="/savedPets">
-                <Button variant="primary" size="lg">
-                  Select a Pet
-                </Button>
-              </Link>
+              <Button variant="primary" size="lg">
+                Select a Pet
+              </Button>
               <Button variant="primary" size="lg">
                 Add a New Pet
               </Button>
