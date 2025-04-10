@@ -6,7 +6,6 @@ import App from './App.jsx'
 import ManagePets from './pages/Home.js'
 import Healthcare from './pages/Healthcare.js'
 import Services from './pages/Services.js'
-import SavedPets from './pages/SavedPets.js'
 
 const router = createBrowserRouter([
   {
@@ -23,9 +22,6 @@ const router = createBrowserRouter([
       }, {
         path: '/services',
         element: <Services />
-      }, {
-        path: '/savedPets',
-        element: <SavedPets />
       }
     ]
   }
