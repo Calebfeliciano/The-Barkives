@@ -9,15 +9,15 @@ import {
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_PET } from '../utils/mutations';
-import { removePetId } from '../utils/localStorage';
+//import { removePetId } from '../utils/localStorage';
 import type { User } from '../models/User';
-import type { Pets } from '../models/Pets';
+import type { Pet } from '../models/Pets';
 
 import Auth from '../utils/auth';
 
 const SavedPets = () => {
   const { loading, data } = useQuery(QUERY_ME);
-  const [removePet] = useMutation(REMOVE_Pet);
+  const [removePet] = useMutation(REMOVE_PET);
 
   const userData: User = data?.me || {};
 
@@ -36,7 +36,9 @@ const SavedPets = () => {
       });
 
       // upon success, remove book's id from localStorage
+      /*
       removePetId(petId);
+      */
     } catch (err) {
       console.error(err);
     }
