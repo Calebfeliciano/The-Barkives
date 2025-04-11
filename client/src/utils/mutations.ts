@@ -31,17 +31,17 @@ export const SAVE_PET = gql`
       username
       email
       savedPets {
-        name: String
-        birthdate: String
-        age: String
+        name
+        birthdate
+        age
         adopted: Boolean
-        adoptionDate: String
-        species: String
-        breed: String
-        color: String
-        weight: String
-        specialMarkings: String
-        specialNeeds: String
+        adoptionDate
+        species
+        breed
+        color
+        weight
+        specialMarkings
+        specialNeeds
       }
     }
   }
@@ -54,17 +54,17 @@ export const REMOVE_PET = gql`
       username
       email
       savedPets {
-        name: String
-        birthdate: String
-        age: String
-        adopted: Boolean
-        adoptionDate: String
-        species: String
-        breed: String
-        color: String
-        weight: String
-        specialMarkings: String
-        specialNeeds: String
+        name
+        birthdate
+        age
+        adopted
+        adoptionDate
+        species
+        breed
+        color
+        weight
+        specialMarkings
+        specialNeeds
       }
     }
   }

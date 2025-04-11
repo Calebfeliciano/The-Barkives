@@ -19,11 +19,9 @@ const petSchema = new Schema<IPet>({
   name: {
     type: String,
   },
-  birthdate: [
-    {
-      type: String,
-    },
-  ],
+  birthdate: {
+    type: String,
+  },
   age: {
     type: String,
   },

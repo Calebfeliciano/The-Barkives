@@ -45,6 +45,8 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    pets: [Pet] #Query to get all pets
+    pet(petId: ID!): Pet #Query to get a single pet by ID
   }
 
   type Mutation {
