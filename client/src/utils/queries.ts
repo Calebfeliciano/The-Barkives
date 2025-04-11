@@ -23,3 +23,29 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const GET_PETS = gql`
+  query GetPets {
+    pets {
+      petId
+      name
+      species
+      breed
+      color
+      weight
+    }
+  }
+`;
+
+export const GET_PET = gql`
+  query GetPet($petId: ID!) {
+    pet(petId: $petId) {
+      petId
+      name
+      species
+      breed
+      color
+      weight
+    }
+  }
+`;
