@@ -1,32 +1,28 @@
 import { Schema, model, type Document } from 'mongoose';
 
 interface IPet extends Document {
-//  petId: ID
-  name: String
-  birthdate: String
-  age: String
-  adopted: Boolean
-  adoptionDate: String
-  species: String
-  breed: String
-  color: String
-  weight: String
-  specialMarkings: String
-  specialNeeds: String
+  petId: string;
+  name: string;
+  birthdate: string;
+  adoptionDate: string;
+  species: string;
+  breed: string;
+  color: string;
+  weight: string;
+  specialMarkings: string;
+  specialNeeds: string;
 }
 
 const petSchema = new Schema<IPet>({
+  petId: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
   },
   birthdate: {
     type: String,
-  },
-  age: {
-    type: String,
-  },
-  adopted: {
-    type: Boolean,
   },
   adoptionDate: {
     type: String,

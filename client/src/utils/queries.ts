@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-  {
+  query Me {
     me {
       _id
       username
@@ -10,8 +10,6 @@ export const QUERY_ME = gql`
         petId
         name
         birthdate
-        age
-        adopted
         adoptionDate
         species
         breed
@@ -29,10 +27,14 @@ export const GET_PETS = gql`
     pets {
       petId
       name
+      birthdate
+      adoptionDate
       species
       breed
       color
       weight
+      specialMarkings
+      specialNeeds
     }
   }
 `;
@@ -42,10 +44,14 @@ export const GET_PET = gql`
     pet(petId: $petId) {
       petId
       name
+      birthdate
+      adoptionDate
       species
       breed
       color
       weight
+      specialMarkings
+      specialNeeds
     }
   }
 `;
