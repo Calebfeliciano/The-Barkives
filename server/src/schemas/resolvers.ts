@@ -1,8 +1,8 @@
 import type IUserContext from '../interfaces/UserContext.js';
 import type IUserDocument from '../interfaces/UserDocument.js';
-import type IPetInput from '../interfaces/PetInput.js';
 import { User } from '../models/index.js';
 import { signToken, AuthenticationError } from '../services/auth-service.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const resolvers = {
   Query: {
@@ -14,6 +14,9 @@ const resolvers = {
         return userData;
       }
       throw new AuthenticationError('User not authenticated');
+    },
+    pets: async (_parent: any, { userId }: any) => {
+      return await User.findById(userId);
     },
   },
   Mutation: {
@@ -33,31 +36,29 @@ const resolvers = {
       const token = signToken(user.username, user.email, user._id);
       return { token, user };
     },
-    savePet: async (_parent: any, { petData }: { petData: IPetInput }, context: IUserContext): Promise<IUserDocument | null> => {
-      if (context.user) {
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { savedPets: petData } },
-          { new: true }
-        );
+    savePet: async (_parent: any, { petData }: any, context: { user: { _id: any; }; }) => {
+      if (!context.user) throw new AuthenticationError('Not logged in');
 
-        return updatedUser;
-      }
+      const newPet = { ...petData, petId: uuidv4() };
 
-      throw new AuthenticationError('User not authenticated');
+      const updatedUser = await User.findByIdAndUpdate(
+        context.user._id,
+        { $push: { savedPets: newPet } },
+        { new: true }
+      );
+
+      return updatedUser;
     },
-    removePet: async (_parent: any, { petId }: { petId: string }, context: IUserContext): Promise<IUserDocument | null> => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { petsBooks: { petId } } },
-          { new: true }
-        );
+    removePet: async (_parent: any, { petId }: any, context: { user: { _id: any; }; }) => {
+      if (!context.user) throw new AuthenticationError('Not logged in');
 
-        return updatedUser;
-      }
+      const updatedUser = await User.findByIdAndUpdate(
+        context.user._id,
+        { $pull: { savedPets: { petId } } },
+        { new: true }
+      );
 
-      throw new AuthenticationError('User not authenticated');
+      return updatedUser;
     },
   },
 };

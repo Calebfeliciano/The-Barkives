@@ -10,10 +10,8 @@ const typeDefs = gql`
 
   type Pet {
     petId: ID!
-    name: String
+    name: String!
     birthdate: String
-    age: String
-    adopted: Boolean
     adoptionDate: String
     species: String
     breed: String
@@ -29,11 +27,8 @@ const typeDefs = gql`
   }
 
   input PetInput {
-    petId: ID!
     name: String
     birthdate: String
-    age: String
-    adopted: Boolean
     adoptionDate: String
     species: String
     breed: String

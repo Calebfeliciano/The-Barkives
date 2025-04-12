@@ -33,8 +33,6 @@ export const SAVE_PET = gql`
       savedPets {
         name
         birthdate
-        age
-        adopted: Boolean
         adoptionDate
         species
         breed
@@ -52,19 +50,9 @@ export const REMOVE_PET = gql`
     removePet(petId: $petId) {
       _id
       username
-      email
       savedPets {
+        petId
         name
-        birthdate
-        age
-        adopted
-        adoptionDate
-        species
-        breed
-        color
-        weight
-        specialMarkings
-        specialNeeds
       }
     }
   }
