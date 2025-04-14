@@ -13,7 +13,10 @@ const RemovePet: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   const handleRemove = async (petId: string) => {
     try {
-      await removePet({ variables: { petId } });
+      await removePet({ 
+        variables: { petId }, 
+        refetchQueries: [{ query: QUERY_ME }]
+      });
       onClose(); // Refresh or close on success
     } catch (err) {
       console.error(err);
