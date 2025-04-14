@@ -27,10 +27,10 @@ const typeDefs = gql`
   }
 
   input PetInput {
-    name: String
+    name: String!
     birthdate: String
     adoptionDate: String
-    species: String
+    species: String!
     breed: String
     color: String
     weight: String
