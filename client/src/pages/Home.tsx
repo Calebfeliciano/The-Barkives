@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import AddPetForm from '../components/AddPet';
 import RemovePet from '../components/RemovePet';
@@ -7,7 +8,7 @@ const Home: React.FC = () => {
   const loggedIn = Auth.loggedIn();
   const [showAdd, setShowAdd] = useState(false);
   const [showRemove, setShowRemove] = useState(false);
-  const [showSelect, setShowSelect] = useState(false);
+//  const [showSelect, setShowSelect] = useState(false);
   const [hideButtons, setHideButtons] = useState(false);
 
   const handleButtonClick = (action: () => void) => {
@@ -22,13 +23,12 @@ const Home: React.FC = () => {
           <h2>Manage your pets:</h2>
           {!hideButtons && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-              <button onClick={() => handleButtonClick(() => setShowSelect(true))}>Select Pet</button>
+              <Link to="/savedpets"><button>Select Pet</button></Link>              
               <button onClick={() => handleButtonClick(() => setShowAdd(true))}>Add Pet</button>
               <button onClick={() => handleButtonClick(() => setShowRemove(true))}>Remove Pet</button>
             </div>
           )}
           <div className="mt-4">
-            {showSelect && <p>Select Pet functionality coming soon!</p>}
             {showAdd && <AddPetForm onClose={() => { setShowAdd(false); setHideButtons(false); }} />}
             {showRemove && <RemovePet onClose={() => { setShowRemove(false); setHideButtons(false); }} />}
           </div>
