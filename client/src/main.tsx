@@ -26,6 +26,9 @@ const router = createBrowserRouter([
       }, {
         path: '/savedPets',
         element: <SavedPets />
+      }, {
+//        path: '/pets/:petId',
+//        element: <SelectPet />
       }
     ]
   }

@@ -1,4 +1,5 @@
 export interface Pet {
+//  petId: string
   name: String
   birthdate: String
   adoptionDate: String
