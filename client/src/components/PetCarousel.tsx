@@ -1,4 +1,3 @@
-
 import CollarWithTag from "./CollarWithTag";
 import { Link } from "react-router-dom";
 

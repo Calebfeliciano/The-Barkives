@@ -7,6 +7,7 @@ import ManagePets from './pages/Home.js'
 import Healthcare from './pages/Healthcare.js'
 import Services from './pages/Services.js'
 import SavedPets from './pages/SavedPets.js'
+import SelectPet from './components/SelectPet.js'
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,8 @@ const router = createBrowserRouter([
         path: '/savedPets',
         element: <SavedPets />
       }, {
-//        path: '/pets/:petId',
-//        element: <SelectPet />
+        path: '/pets/:petId',
+        element: <SelectPet />
       }
     ]
   }
