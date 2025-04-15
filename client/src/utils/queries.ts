@@ -17,6 +17,14 @@ export const QUERY_ME = gql`
         weight
         specialMarkings
         specialNeeds
+        allergies
+        conditions
+        medications
+        vetInfo {
+          name
+          phoneNumber
+          address
+        }
       }
     }
   }
@@ -35,6 +43,14 @@ export const GET_PETS = gql`
       weight
       specialMarkings
       specialNeeds
+      allergies
+      conditions
+      medications
+      vetInfo {
+        name
+        phoneNumber
+        address
+      }
     }
   }
 `;
@@ -52,6 +68,14 @@ export const GET_PET = gql`
       weight
       specialMarkings
       specialNeeds
+      allergies
+      conditions
+      medications
+      vetInfo {
+        name
+        phoneNumber
+        address
+      }
     }
   }
 `;

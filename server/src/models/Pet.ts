@@ -11,6 +11,14 @@ interface IPet extends Document {
   weight: string;
   specialMarkings: string;
   specialNeeds: string;
+  allergies: string;
+  conditions: string;
+  medications: string;
+  vetInfo: {
+    name: string;
+    phoneNumber: string;
+    address: string;
+  };
 }
 
 const petSchema = new Schema<IPet>({
@@ -44,6 +52,26 @@ const petSchema = new Schema<IPet>({
   },
   specialNeeds: {
     type: String,
+  },
+  allergies: {
+    type: String,
+  },
+  conditions: {
+    type: String,
+  },
+  medications: {
+    type: String,
+  },
+  vetInfo: {
+    name: {
+      type: String,
+    },
+    phoneNumber: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
   },
 });
 
