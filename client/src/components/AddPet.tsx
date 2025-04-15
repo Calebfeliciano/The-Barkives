@@ -13,6 +13,14 @@ const AddPetForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     weight: '',
     specialMarkings: '',
     specialNeeds: '',
+    allergies: '',
+    conditions: '',
+    medications: '',
+    vetInfo: {
+      name: '',
+      phoneNumber: '',
+      address: '',
+    },
   });
 
   const [savePet] = useMutation(SAVE_PET);
@@ -85,7 +93,61 @@ const AddPetForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       {renderInputRow('Weight', 'weight')}
       {renderInputRow('Special Markings', 'specialMarkings', 'text', true)}
       {renderInputRow('Special Needs', 'specialNeeds', 'text', true)}
-
+      {renderInputRow('Allergies', 'allergies', 'text', true)}
+      {renderInputRow('Conditions', 'conditions', 'text', true)}
+      {renderInputRow('Medications', 'medications', 'text', true)}
+      <div className="row mb-3 align-items-center">
+        <label htmlFor="vetInfo" className="col-sm-3 col-form-label">
+          Vet Info
+        </label>
+        <div className="col-sm-9">
+          <div className="row mb-3">
+            <label htmlFor="vetName" className="col-sm-3 col-form-label">
+              Name
+            </label>
+            <div className="col-sm-9">
+              <input
+                id="vetName"
+                name="vetName"
+                type="text"
+                onChange={(e) => setFormData({ ...formData, vetInfo: { ...formData.vetInfo, name: e.target.value } })}
+                className="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div className="row mb-3">
+            <label htmlFor="vetPhoneNumber" className="col-sm-3 col-form-label">
+              Phone Number
+            </label>
+            <div className="col-sm-9">
+              <input
+                id="vetPhoneNumber"
+                name="vetPhoneNumber"
+                type="text"
+                onChange={(e) => setFormData({ ...formData, vetInfo: { ...formData.vetInfo, phoneNumber: e.target.value } })}
+                className="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div className="row mb-3">
+            <label htmlFor="vetAddress" className="col-sm-3 col-form-label">
+              Address
+            </label>
+            <div className="col-sm-9">
+              <input
+                id="vetAddress"
+                name="vetAddress"
+                type="text"
+                onChange={(e) => setFormData({ ...formData, vetInfo: { ...formData.vetInfo, address: e.target.value } })}
+                className="form-control"
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="d-flex justify-content-end">
         <button type="submit" className="btn btn-success me-2">Save</button>
         <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>

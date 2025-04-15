@@ -19,6 +19,16 @@ const typeDefs = gql`
     weight: String
     specialMarkings: String
     specialNeeds: String
+    allergies: String
+    conditions: String
+    medications: String
+    vetInfo: VetInfo
+  }
+
+  type VetInfo {
+    name: String
+    phoneNumber: String
+    address: String
   }
 
   type Auth {
@@ -36,6 +46,16 @@ const typeDefs = gql`
     weight: String
     specialMarkings: String
     specialNeeds: String
+    allergies: String
+    conditions: String
+    medications: String
+    vetInfo: VetInfoInput
+  }
+
+  input VetInfoInput {
+    name: String
+    phoneNumber: String
+    address: String
   }
 
   type Query {

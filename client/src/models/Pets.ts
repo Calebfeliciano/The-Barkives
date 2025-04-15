@@ -9,4 +9,10 @@ export interface Pet {
   weight: String
   specialMarkings: String
   specialNeeds: String
+  allergies: String
+  conditions: String
+  medications: String
+  vetName: String
+  vetPhone: String
+  vetAddress: String
 }

@@ -9,4 +9,12 @@ export default interface IPetInput {
   weight: String | null
   specialMarkings: String | null
   specialNeeds: String | null
+  allergies: String | null
+  conditions: String | null
+  medications: String | null
+  vetInfo: {
+    name: String | null
+    phoneNumber: String | null
+    address: String | null
+  } | null
 }
