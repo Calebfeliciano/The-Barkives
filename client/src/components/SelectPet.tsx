@@ -51,7 +51,9 @@ const SelectPet = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading pet: {error.message}</p>;
 
-  const pet: Pet = data?.pet;
+  const pet = data?.pet;
+  if (!pet) return <p>Pet not found!</p>;
+
 
   return (
     <div className="select-pet">

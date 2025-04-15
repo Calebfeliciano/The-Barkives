@@ -18,6 +18,17 @@ const resolvers = {
     pets: async (_parent: any, { userId }: any) => {
       return await User.findById(userId);
     },
+    
+    pet: async (_parent: any, { petId }: { petId: string }) => {
+      const users = await User.find();
+      for (const user of users) {
+        const foundPet = user.savedPets.find(pet => pet.petId === petId);
+        if (foundPet) {
+          return foundPet;
+        }
+      }
+      return null;
+    }
   },
   Mutation: {
     addUser: async (_parent: any, args: any): Promise<{ token: string; user: IUserDocument }> => {
