@@ -39,6 +39,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PET } from "../utils/queries";
 import { Pet } from "../models/Pets"; // adjust the path as needed
+import { useEffect } from "react";
 
 const SelectPet = () => {
   const { petId } = useParams<{ petId: string }>();
@@ -47,6 +48,12 @@ const SelectPet = () => {
     variables: { petId }, // ✅ This must match the variable name in your query
     skip: !petId, // In case petId is undefined briefly
   });
+
+  useEffect(() => {
+    if (data?.pet) {
+      localStorage.setItem("selectedPet", JSON.stringify(data.pet));
+    }
+  }, [data]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading pet: {error.message}</p>;

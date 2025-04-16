@@ -1,17 +1,9 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../utils/queries';
 
 const Healthcare: React.FC = () => {
-  const selectedPetId = localStorage.getItem('selectedPetId');
-  const { loading, error, data } = useQuery(QUERY_ME);
+  const selectedPetData = localStorage.getItem('selectedPet');
 
-  if (loading) return <p>Loading pet data...</p>;
-  if (error) return <p>Error fetching data: {error.message}</p>;
-
-  const pet = data?.me?.savedPets?.find((p: any) => p.petId === selectedPetId);
-
-  if (!pet) {
+  if (!selectedPetData) {
     return (
       <div>
         <p>No pet selected.</p>
@@ -19,6 +11,8 @@ const Healthcare: React.FC = () => {
       </div>
     );
   }
+
+  const pet = JSON.parse(selectedPetData);
 
   return (
     <div style={{ padding: '1rem' }}>
