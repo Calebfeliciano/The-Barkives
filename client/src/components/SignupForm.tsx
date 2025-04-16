@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { ChangeEvent, FormEvent } from 'react';
 
@@ -21,13 +21,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
   const [addUser, { error }] = useMutation(ADD_USER);
 
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -50,15 +44,34 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
       });
 
       Auth.login(data.addUser.token);
+
+      setUserFormData({
+        username: '',
+        email: '',
+        password: '',
+      });
+      
     } catch (err) {
       console.error(err);
-    }
+      setShowAlert(true);
 
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
+      // Set the error message based on the error type
+      if (err instanceof Error && (err as any)?.graphQLErrors?.length > 0) {
+        const errorMessage = (err as any).graphQLErrors[0]?.message;
+  
+        if (errorMessage.includes('Username already exists')) {
+          setErrorMessage('This username is taken.');
+        } else if (errorMessage.includes('Email already exists')) {
+          setErrorMessage('This email is already in use.');
+        } else if (errorMessage.includes('Invalid email format')) {
+          setErrorMessage('Please enter a valid email address.');
+        } else {
+          setErrorMessage('Something went wrong with your signup.');
+        }
+      } else {
+        setErrorMessage('Something went wrong with your signup.');
+      }
+    }
   };
 
   return (
@@ -69,10 +82,10 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
-          show={showAlert}
+          show={showAlert || !!error}
           variant="danger"
         >
-          Something went wrong with your signup!
+          {errorMessage}
         </Alert>
 
         <Form.Group className='mb-3'>
