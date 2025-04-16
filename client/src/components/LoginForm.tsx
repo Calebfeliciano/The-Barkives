@@ -1,6 +1,6 @@
 // see SignupForm.js for comments
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import type { ChangeEvent, FormEvent } from 'react';
 
@@ -16,13 +16,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
 
   const [login, { error }] = useMutation(LOGIN_USER);
 
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -44,15 +38,30 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
       });
 
       Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
-    }
 
-    // clear form values
-    setUserFormData({
-      email: '',
-      password: '',
-    });
+      // clear form values
+      setUserFormData({
+        email: '',
+        password: '',
+      });
+
+    } catch (e) {
+      console.error('Login error: ', e);
+      setShowAlert(true);
+
+      // Set error message based on error type
+      if (e instanceof Error && (e as any)?.graphQLErrors?.length > 0) {
+        const errorMessage = (e as any).graphQLErrors[0]?.message;
+  
+        if (errorMessage.includes('Invalid email format')) {
+          setErrorMessage('Invalid email address.');
+        } else {
+          setErrorMessage('Username or password is incorrect.');
+        }
+      } else {
+        setErrorMessage('Something went wrong with your login.');
+      }
+    }
   };
 
   return (
@@ -61,10 +70,10 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
-          show={showAlert}
+          show={showAlert || !!error}
           variant="danger"
         >
-          Something went wrong with your login credentials!
+          {errorMessage}
         </Alert>
         <Form.Group className='mb-3'>
           <Form.Label htmlFor="email">Email</Form.Label>

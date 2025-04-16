@@ -29,15 +29,40 @@ const resolvers = {
       }
       return null;
     }
-  },
-  Mutation: {
+    },
+    Mutation: {
     addUser: async (_parent: any, args: any): Promise<{ token: string; user: IUserDocument }> => {
+      // Check if the username already exists
+      const existingUser = await User.findOne({ username: args.username });
+      if (existingUser) {
+      throw new AuthenticationError('Username already exists');
+      }
+
+      // Check if the email already exists
+      const existingEmail = await User.findOne({ email: args.email });
+      if (existingEmail) {
+      throw new AuthenticationError('Email already exists');
+      }
+
+      // Check if the email is valid
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(args.email)) {
+      throw new AuthenticationError('Invalid email format');
+      }
+      
       const user = await User.create(args);
       const token = signToken(user.username, user.email, user._id);
-            
+        
       return { token, user };
     },
     login: async (_parent: any, { email, password }: { email: string; password: string }): Promise<{ token: string; user: IUserDocument }> => {
+      // Check if the email is valid
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        throw new AuthenticationError('Invalid email format');
+      }
+
+      // Find the user by email and validate the password
       const user = await User.findOne({ email });
 
       if (!user || !(await user.isCorrectPassword(password))) {
