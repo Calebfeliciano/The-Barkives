@@ -17,6 +17,10 @@
     --transition-speed: 0.3s;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-family);
     background-color: var(--light);
@@ -54,4 +58,22 @@ body {
   
   button:hover {
     background-color: var(--tertiary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    transition: var(--transition);
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
   }
