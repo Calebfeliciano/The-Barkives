@@ -1,67 +1,93 @@
-# The-Barkives
+# The Barkives
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+The Barkives is a pet management application designed to help users organize and track essential information about their pets. Users can store details such as name, birth date, breed, and color, as well as manage healthcare records, services, and appointments through an integrated calendar. Built with the MERN stack, this application ensures data security through authentication. Key technologies include a React and TypeScript front end, a GraphQL API, and a MongoDB Atlas database for data storage.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+## Table of Contents
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
+- [Link to Application](#link-to-application)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
 
+## Link to Application
+
+Link goes here
+
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+The Barkives is accessible via any web browser using the link above. No installation is required. To run the application locally for development or customization, follow these steps:
+
+**_Note: Ensure you have access to a GraphQL-compatible database, such as MongoDB Compass._**
+
+1. Open your terminal and navigate to the directory where you'd like to store the repository.
+
+2. Clone the repository using the following command:
+
+   ```sh
+   git clone https://github.com/Calebfeliciano/The-Barkives.git
+   ```
+
+3. Navigate into the project directory:
+
+   ```sh
+   cd The-Barkives
+   ```
+
+4. Rename the `.env.EXAMPLE` file located in the `server` folder to `.env`.
+
+5. Install the required dependencies:
+
+   ```sh
+   npm install
+   ```
+
+6. Build the application:
+
+   ```sh
+   npm run build
+   ```
+
+7. Start the server and launch the application in your browser:
+
+   ```sh
+   npm run develop
+   ```
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+The Barkives can be accessed via a web browser or run locally. Follow the installation steps above to set up the local environment. Note that the GraphQL server runs on port 3001, while the Vite development server runs on port 3000.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+1. Visit the application link to access The Barkives home page, as shown below:
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+   ![Barkives home page](./assets/home.png)
+
+2. Create an account by clicking the "Login/Sign Up" button.
+
+3. After signing up, you'll be logged in automatically. Add pets to your database by clicking "Add Pet". Fill out your pet's information, then hit "Save" to save the pet to the database.
+
+4. Select a pet by clicking "Select Pet" and choosing a pet from the list.
+
+5. View detailed information about the selected pet by navigating through the tabs ("Healthcare," "Services," or "Calendar").
+
+6. To remove a pet, return to the home page via the "Home" tab, click "Remove Pet," and click "Remove" on the pet you'd like to remove.
+
+7. When finished, log out by clicking the "Logout" button at the top.
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+This project was developed by Group 1 of the Rutgers University Coding Bootcamp, section RUT-VIRT-FSF-PT-10-2024-U-LOLC-MWTH. Team members include Ashleigh Brown, Caleb Feliciano, Alex Newcomer, Tyreone Sarpong, and Amelia Alvarado. Below are links to our GitHub profiles:
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+- [Ashleigh Brown](https://github.com/AshB88)
+- [Caleb Feliciano](https://github.com/Calebfeliciano)
+- [Alex Newcomer](https://github.com/AlexMNewcomer)
+- [Tyreone Sarpong](https://github.com/Tyreone58)
+- [Amelia Alvarado](https://github.com/amelia1105)
 
-If you followed tutorials, include links to those here as well.
+This project utilized starter code from a previous assignment (RUT-VIRT-FSF-PT-10-2024-U-LOL > 18-MERN-and-Authentication > 02-Challenge > Main). While the starter code provided the foundation for authentication, authorization, and database connection, we extensively modified and expanded it. Updates included new models, pages, components, queries, mutations, interfaces, type definitions, resolvers, and custom styling. Additionally, we leveraged tools like ChatGPT and GitHub Copilot to enhance our code.
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+This project is licensed under the MIT License. For more details, click the "MIT license" tab at the top of this README.
