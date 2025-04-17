@@ -5,8 +5,7 @@ name: Build Check
 on:
   pull_request:
     branches:
-      - develop
-      - staging
+      - main
 
 # Jobs to carry out
 jobs:
