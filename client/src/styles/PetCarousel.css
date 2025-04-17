@@ -1,0 +1,35 @@
+.pet-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  
+  .pet-carousel::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  
+  .pet-item {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+    background: #ffffffcc;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pet-item:hover {
+    transform: scale(1.05) rotate(-1deg);
+  }
+  
+  @media (max-width: 768px) {
+    .pet-carousel {
+      flex-direction: column;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+    }
+  }
+  

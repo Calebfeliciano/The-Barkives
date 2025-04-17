@@ -1,0 +1,28 @@
+.pet-card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin: 1.5rem auto;
+    max-width: 600px;
+    color: #333;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .pet-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
+  
+  .pet-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary, #BBACC1);
+  }
+  
+  .pet-card p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    line-height: 1.4;
+  }
+  
