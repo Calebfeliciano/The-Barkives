@@ -1,35 +1,83 @@
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 70vh;
+}
+
 .pet-carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    padding: 1rem;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.pet-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.pet-item {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  max-width: 60vw;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.collar-container {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.pet-item .collar-container {
+  scale: 1.5;
+}
+
+.pet-item.active {
+  animation: glow-pulse 2s infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px #bbacc1cc;
   }
+  50% {
+    box-shadow: 0 0 40px #bbacc1ee;
+  }
+}
   
-  .pet-carousel::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
-  
-  .pet-item {
-    scroll-snap-align: center;
-    flex: 0 0 auto;
-    transition: transform 0.3s ease;
-    border-radius: 12px;
-    background: #ffffffcc;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .pet-item:hover {
-    transform: scale(1.05) rotate(-1deg);
-  }
-  
-  @media (max-width: 768px) {
-    .pet-carousel {
-      flex-direction: column;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-    }
-  }
+/* Framer Motion arrow entry animations */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.8;
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+}
+
+.arrow.left {
+  left: 1rem;
+}
+
+.arrow.right {
+  right: 1rem;
+}
+
   

@@ -1,119 +1,111 @@
 /* Collar Styles */
 .collar-wrapper {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;  /* Adjust this to make the collars larger */
+  max-height: 300px; /* Adjust this to control the collar height */
+  position: relative;
+  transform-style: preserve-3d;  /* This ensures the 3D effect when rotating */
+}
+
+/* Collar Band Styles */
+.collar-band {
+  width: 350px;
+  height: 40px;  /* Adjust thickness for a more prominent collar */
+  background-color: #BBACC1;  /* Your collar color */
+  border-radius: 15px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Shadow for floating effect */
+}
+
+/* Collar Ring Position */
+.collar-ring {
+  width: 50px;  /* Larger size for the ring */
+  height: 50px;
+  background-color: #909580;
+  border-radius: 50%;
+  position: absolute;
+  top: -9px;  /* Adjust to position ring above the collar */
+  z-index: 2;
+}
+
+/* Swinging Tag Animation */
+.swing-container {
+  display: flex;
+  justify-content: center;
+}
+
+.swing-tag {
+  transform-origin: top center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.swing-container:hover .swing-tag,
+.swing-container.swing .swing-tag {
+  animation: swing 0.6s ease-in-out;
+}
+
+@keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(6deg); }
+  50% { transform: rotate(-6deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Shining Animation for Tag */
+.tag-shape {
+  animation: shine 2s infinite linear;
+  animation-play-state: paused;
+}
+
+.swing-container:hover .tag-shape,
+.swing-container.swing .tag-shape {
+  animation-play-state: running;
+}
+
+@keyframes shine {
+  0% {
+    fill: url(#shine);
+  }
+  100% {
+    fill: url(#shine);
+  }
+}
+
+/* Pet Carousel Styles */
+.pet-carousel {
+  display: flex;
+  justify-content: center;  /* Center the collars in the container */
+  align-items: center;  /* Vertically center the carousel */
+  overflow-x: auto;
+  gap: 3rem;  /* Adjusted to give some breathing room between collars */
+  padding: 2rem;
+  flex-direction: row;
+  width: 100%;
+  max-width: 100vw;  /* Ensure it doesn't stretch beyond the viewport */
+  scroll-snap-type: x mandatory;
+}
+
+/* Prevent the scrollbar from showing */
+.pet-carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+@media (max-width: 768px) {
+  .arrow {
+    display: none;  /* Hide the arrow buttons on small screens */
+  }
+
+  .pet-carousel {
     flex-direction: column;
-    align-items: center;
-    margin: 1rem;
-    position: relative;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    gap: 2rem; /* Adjust gap on mobile */
   }
-  
-  .collar-band {
-    width: 150px;
-    height: 15px;
-    background: linear-gradient(to right, #a52a2a, #8b0000); /* leathery feel */
-    border-radius: 8px;
-    /*box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 2px 5px rgba(0, 0, 0, 0.3);*/
-    box-shadow:
-    inset 0 1px 4px rgba(255,255,255,0.3), /* highlight */
-    inset 0 -2px 3px rgba(0,0,0,0.4),      /* shadow */
-    0 2px 6px rgba(0,0,0,0.3);            /* outer shadow */
-    position: relative;
-  }
-  
-  /* Optional: Add a shine effect to the collar */
-  /*
-  .collar-band::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0.2) 100%
-    );
-    transform: skewX(-20deg);
-    animation: shine 2s infinite linear;
-  }
-  
-  @keyframes shine {
-    0% {left: -75%; }
-    100% {left: 125%; }
-  }
-  */
-  
-  .collar-ring {
-    width: 20px;
-    height: 20px;
-    border: 3px solid #999;
-    border-radius: 50%;
-    background-color: #ccc;
-    margin-top: -10px; /* pull up into the band */
-    z-index: 2;
-    position: relative;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
-  }
-  
-  
-  /* Swinging Tag */
-  .swing-container {
-      display: flex;
-      justify-content: center;
-    }
-    
-    .swing-tag {
-      transform-origin: top center;
-      transition: transform 0.3s ease-in-out;
-    }
-    
-    .swing-container:hover .swing-tag,
-    .swing-container.swing .swing-tag {
-      animation: swing 0.6s ease-in-out;
-    }
-    
-    @keyframes swing {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(6deg); }
-      50% { transform: rotate(-6deg); }
-      75% { transform: rotate(3deg); }
-      100% { transform: rotate(0deg); }
-    }
-    
-    .tag-shape {
-      animation: shine 2s infinite linear;
-      animation-play-state: paused;
-    }
-    
-    .swing-container:hover .tag-shape,
-    .swing-container.swing .tag-shape {
-      animation-play-state: running;
-    }
-    
-    @keyframes shine {
-      0% {
-        fill: url(#shine);
-      }
-      100% {
-        fill: url(#shine);
-      }
-    }
-  
-    .pet-carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 2rem;
-      padding: 1rem;
-      flex-direction: row;
-    }
-    
-    @media (max-width: 768px) {
-      .pet-carousel {
-        flex-direction: column;
-        overflow-y: auto;
-        scroll-snap-type: y mandatory;
-      }
-    }
+}

@@ -6,7 +6,6 @@ interface CollarWithTagProps {
 }
 
 const CollarWithTag: React.FC<CollarWithTagProps> = ({ name }) => {
-
     return (
         <div className="collar-wrapper">
             <div className="collar-band" />
