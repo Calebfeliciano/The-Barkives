@@ -2,6 +2,7 @@
 import { jwtDecode } from 'jwt-decode';
 
 interface UserToken {
+  _id: string;
   name: string;
   exp: number;
 }

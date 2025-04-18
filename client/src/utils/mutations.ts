@@ -57,3 +57,22 @@ export const REMOVE_PET = gql`
     }
   }
 `;
+
+export const ADD_APPOINTMENT = gql`
+  mutation addAppointment($userId: ID!, $input: AppointmentInput!) {
+    addAppointment(userId: $userId, input: $input) {
+      _id
+      title
+      description
+      date
+      time
+      userId
+    }
+  }
+`;
+
+export const DELETE_APPOINTMENT = gql`
+  mutation deleteAppointment($appointmentId: ID!) {
+    deleteAppointment(appointmentId: $appointmentId)
+  }
+`;

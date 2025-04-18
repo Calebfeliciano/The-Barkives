@@ -8,6 +8,7 @@ import Healthcare from './pages/Healthcare.js'
 import Services from './pages/Services.js'
 import SavedPets from './pages/SavedPets.js'
 import SelectPet from './components/SelectPet.js'
+import Calendar from './pages/Calendar.js'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,9 @@ const router = createBrowserRouter([
       }, {
         path: '/services',
         element: <Services />
+      }, {
+        path: '/calendar',
+        element: <Calendar />
       }, {
         path: '/savedPets',
         element: <SavedPets />
