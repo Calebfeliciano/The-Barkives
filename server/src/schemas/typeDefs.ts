@@ -58,10 +58,27 @@ const typeDefs = gql`
     address: String
   }
 
+  type Appointment {
+  _id: ID!
+  title: String!
+  description: String
+  date: String!
+  time: String!
+  userId: ID!
+}
+
+  input AppointmentInput {
+  title: String!
+  description: String
+  date: String!
+  time: String!
+}
+
   type Query {
     me: User
     pets: [Pet] #Query to get all pets
     pet(petId: ID!): Pet #Query to get a single pet by ID
+    appointmentsByUser(userId: ID!): [Appointment]
   }
 
   type Mutation {
@@ -69,6 +86,8 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     savePet(petData: PetInput!): User
     removePet(petId: ID!): User
+    addAppointment(userId: ID!, input: AppointmentInput!): Appointment
+    deleteAppointment(appointmentId: ID!): Boolean
   }
 `;
 

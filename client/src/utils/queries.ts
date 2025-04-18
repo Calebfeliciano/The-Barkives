@@ -79,3 +79,16 @@ export const GET_PET = gql`
     }
   }
 `;
+
+export const GET_APPOINTMENTS = gql`
+  query getAppointmentsByUser($userId: ID!) {
+    appointmentsByUser(userId: $userId) {
+      _id
+      title
+      description
+      date
+      time
+      userId
+    }
+  }
+`;

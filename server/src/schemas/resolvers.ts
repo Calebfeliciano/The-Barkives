@@ -1,6 +1,6 @@
 import type IUserContext from '../interfaces/UserContext.js';
 import type IUserDocument from '../interfaces/UserDocument.js';
-import { User } from '../models/index.js';
+import { User, Appointment } from '../models/index.js';
 import { signToken, AuthenticationError } from '../services/auth-service.js';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,7 +18,6 @@ const resolvers = {
     pets: async (_parent: any, { userId }: any) => {
       return await User.findById(userId);
     },
-    
     pet: async (_parent: any, { petId }: { petId: string }) => {
       const users = await User.find();
       for (const user of users) {
@@ -28,8 +27,11 @@ const resolvers = {
         }
       }
       return null;
-    }
     },
+    appointmentsByUser: async (_parent: any, { userId }: any) => {
+      return await Appointment.find({ userId: userId });
+    },
+  },
     Mutation: {
     addUser: async (_parent: any, args: any): Promise<{ token: string; user: IUserDocument }> => {
       // Check if the username already exists
@@ -95,6 +97,13 @@ const resolvers = {
       );
 
       return updatedUser;
+    },
+    addAppointment: async (_parent: any, { userId, input }: any) => {
+      return await Appointment.create({ ...input, userId });
+    },
+    deleteAppointment: async (_parent: any, { appointmentId }: any) => {
+      const deleted = await Appointment.findByIdAndDelete(appointmentId);
+      return !!deleted;
     },
   },
 };
