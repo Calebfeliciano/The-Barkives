@@ -1,79 +1,122 @@
 :root {
-    --primary: #BBACC1;
-    --secondary: #909580;
-    --tertiary: #80727B;
-    --dark: #545643;
-    --light: #F1DEDE;
+  --primary: #BBACC1;
+  --secondary: #909580;
+  --tertiary: #80727B;
+  --dark: #545643;
+  --light: #F1DEDE;
 
-    --text: #2d2d2d;
-    --radius: 1rem;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease-in-out;
-    --font-family: 'Poppins', sans-serif;
+  --text: #2d2d2d;
+  --radius: 1rem;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease-in-out;
+  --font-family: 'Poppins', sans-serif;
 
-    --text-dark: #2e2e2e;
-    --text-light: #fefefe;
-    --border-radius: 1rem;
-    --transition-speed: 0.3s;
+  --text-dark: #2e2e2e;
+  --text-light: #fefefe;
+  --border-radius: 1rem;
+  --transition-speed: 0.3s;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--dark);
 }
 
 body {
-    font-family: var(--font-family);
-    background-color: var(--light);
-    color: var(--text);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-  }
+  font-family: var(--font-family);
+  background-color: var(--light);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
   
-  h1, h2, h3, h4 {
-    font-weight: 600;
-    color: var(--dark);
-  }
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: var(--dark);
+}
   
-  a {
-    text-decoration: none;
-    color: var(--primary);
-    transition: var(--transition);
-  }
-  
-  a:hover {
-    color: var(--tertiary);
-  }
-  
-  button {
-    background-color: var(--primary);
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  
-  button:hover {
-    background-color: var(--tertiary);
-  }
+a {
+  text-decoration: none;
+  color: var(--primary);
+  transition: var(--transition);
+}
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 1rem;
-    transition: var(--transition);
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
+a:hover {
+  color: var(--tertiary);
+}
+
+button {
+  background-color: var(--primary);
+  color: var(--light);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--tertiary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  background-color: var(--secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  transition: var(--transition);
+  color: var(--light);
+  font-size: 1.2rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Custom scrollbar for WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tertiary);
+  border-radius: 10px;
+  border: 2px solid var(--light);
+  transition: background var(--transition-speed) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tertiary) rgba(255, 255, 255, 0.1);
+}

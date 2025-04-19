@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import AddPetForm from '../components/AddPet';
 import RemovePet from '../components/RemovePet';
+import '../styles/HomePage.css'
+import { useOutletContext } from 'react-router-dom';
+
+type ContextType = { showModal: boolean};
 
 const Home: React.FC = () => {
+  const { showModal } = useOutletContext<ContextType>();
   const loggedIn = Auth.loggedIn();
   const [showAdd, setShowAdd] = useState(false);
   const [showRemove, setShowRemove] = useState(false);
 //  const [showSelect, setShowSelect] = useState(false);
   const [hideButtons, setHideButtons] = useState(false);
+
 
   const handleButtonClick = (action: () => void) => {
     setHideButtons(true);
@@ -20,12 +26,12 @@ const Home: React.FC = () => {
     <div className="home-container" style={{ padding: '2rem', textAlign: 'center' }}>
       {loggedIn ? (
         <>
-          <h2>Manage your pets:</h2>
+          <h2>Manage your pets</h2>
           {!hideButtons && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-              <Link to="/savedpets"><button>Select Pet</button></Link>              
-              <button onClick={() => handleButtonClick(() => setShowAdd(true))}>Add Pet</button>
-              <button onClick={() => handleButtonClick(() => setShowRemove(true))}>Remove Pet</button>
+            <div className="home-buttons">
+              <Link to="/savedpets"><button className="manage-btn">Select Pet</button></Link>              
+              <button onClick={() => handleButtonClick(() => setShowAdd(true))} className="manage-btn">Add Pet</button>
+              <button onClick={() => handleButtonClick(() => setShowRemove(true))} className="manage-btn">Remove Pet</button>
             </div>
           )}
           <div className="mt-4">
@@ -33,8 +39,13 @@ const Home: React.FC = () => {
             {showRemove && <RemovePet onClose={() => { setShowRemove(false); setHideButtons(false); }} />}
           </div>
         </>
-      ) : (
-        <><h2>Access the Barkives!</h2><p>Log in to manage pets</p></>
+      ) : null}
+  
+      {!loggedIn && !showModal && (
+        <>
+          <h2>Access the Barkives!</h2>
+          <p>Log in to manage pets</p>
+        </>
       )}
     </div>
   );

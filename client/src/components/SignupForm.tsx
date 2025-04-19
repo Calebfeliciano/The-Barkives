@@ -141,7 +141,6 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
             )
           }
           type="submit"
-          variant="success"
         >
           Submit
         </Button>
