@@ -30,7 +30,7 @@ const RemovePet: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         {pets.map((pet: any) => (
           <li key={pet.petId} className="list-group-item d-flex justify-content-between align-items-center">
             {pet.name}
-            <button className="btn btn-sm btn-danger" onClick={() => handleRemove(pet.petId)}>Remove</button>
+            <button className="remove" onClick={() => handleRemove(pet.petId)}>Remove</button>
           </li>
         ))}
       </ul>

@@ -148,9 +148,9 @@ const AddPetForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           </div>
         </div>
       </div>
-      <div className="d-flex justify-content-end">
-        <button type="submit" className="btn btn-success me-2">Save</button>
-        <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
+      <div className="d-flex justify-content-center" id="pet-form-buttons">
+        <button type="submit">Save</button>
+        <button type="button" onClick={onClose}>Cancel</button>
       </div>
     </form>
   );

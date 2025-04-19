@@ -1,20 +1,27 @@
-import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import { IoPawOutline } from "react-icons/io5";
+import '../styles/index.css';
+
 
 import Auth from '../utils/auth';
 
-const AppNavbar = () => {
-  const [showModal, setShowModal] = useState(false);
+type NavbarProps = {
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const AppNavbar: React.FC<NavbarProps> = ({ showModal, setShowModal }) => {
 
   return (
     <>
-      <Navbar>
+      <Navbar className= "navbar">
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            The Barkives
+          <Navbar.Brand className='logo' as={Link} to='/'>
+            The Barkives <IoPawOutline />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>

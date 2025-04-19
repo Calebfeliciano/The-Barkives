@@ -7,6 +7,8 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { useState } from 'react';
+
 
 import Navbar from './components/Navbar';
 
@@ -47,10 +49,12 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <ApolloProvider client={client}>
-      <Navbar />
-      <Outlet />
+      <Navbar showModal={showModal} setShowModal={setShowModal}/>
+      <Outlet context={{ showModal }} />
     </ApolloProvider>
   );
 }

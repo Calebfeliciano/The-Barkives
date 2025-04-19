@@ -1,45 +1,8 @@
 import CollarWithTag from "./CollarWithTag";
 import { Link } from "react-router-dom";
 import "../styles/PetCarousel.css"; 
-import { motion, /*useAnimation*/ } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-
-/*
-interface PetCarouselProps {
-    pets: {
-        petId: string;
-        name: string;
-    }[];
-    onSelect?: (petId: string) => void;
-}
-
-
-const PetCarousel: React.FC<PetCarouselProps> = ({ pets, onSelect}) => {
-    if (!pets || pets.length === 0) {
-        return <div>No pets available</div>;
-    }
-
-    return (
-        <div className="pet-carousel">
-          {pets.map((pet) => (
-            <motion.div
-            whileHover={{ scale: 1.05, rotate: -1 }}
-            whileTap={{ scale: 0.95 }}
-            key={pet.petId}
-            className="pet-item"
-            onClick={() => onSelect?.(pet.petId)}
-          >
-            <Link to={`/pets/${pet.petId}`}>
-              <CollarWithTag name={pet.name} />
-            </Link>
-          </motion.div>
-          ))}
-        </div>
-    );
-};
-
-export default PetCarousel;
-*/
 
 interface PetCarouselProps {
   pets: {
@@ -52,28 +15,29 @@ interface PetCarouselProps {
 const PetCarousel: React.FC<PetCarouselProps> = ({ pets }) => {
   const [isHovered, setIsHovered] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-//  const controls = useAnimation();
+
+  // Detect if the device is touch-enabled (to avoid auto-scrolling on mobile)
+  const isTouchDevice = typeof window !== "undefined" &&
+    ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
   // Auto-scroll effect
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (!isHovered) {
-      interval = setInterval(() => {
-        if (scrollRef.current) {
-          scrollRef.current.scrollLeft += 1;
-        }
-      }, 30);
-    }
-  
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isHovered]);
+    if (isHovered || isTouchDevice || !scrollRef.current) return;
+
+    const interval = setInterval(() => {
+      scrollRef.current!.scrollLeft += 1; // Adjust speed as needed
+    }, 20);
+
+    return () => clearInterval(interval);
+  }, [isHovered, isTouchDevice]);
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const amount = scrollRef.current.clientWidth * 0.5;
-      scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+      scrollRef.current.scrollBy({ 
+        left: direction === "left" ? -amount : amount, 
+        behavior: "smooth" 
+      });
     }
   };
 
@@ -100,8 +64,8 @@ const PetCarousel: React.FC<PetCarouselProps> = ({ pets }) => {
         ))}
       </div>
 
-      {/* Arrow controls */}
-      {isHovered && (
+      {/* Arrow controls only on desktop & hover */}
+      {!isTouchDevice && isHovered && (
         <>
           <button className="arrow left" onClick={() => handleScroll("left")}>&lt;</button>
           <button className="arrow right" onClick={() => handleScroll("right")}>&gt;</button>

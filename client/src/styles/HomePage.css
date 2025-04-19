@@ -1,0 +1,66 @@
+.home-container h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.home-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.manage-btn {
+    width: 300px;
+    height: 400px;
+    font-size: 1.5rem;
+}
+
+/* Add Pet Form */
+
+#pet-form-buttons button {
+    width: 300px;
+    height: 100px;
+    font-size: 1.5rem;
+}
+
+#pet-form-buttons {
+    gap: 2rem;   
+}
+
+/* Remove Pet Form */
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+}
+
+/* Healthcare Card */
+
+.healthcare-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#healthcare {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 2rem;
+    border-radius: 20px;
+    background-color: rgba(144, 149, 128, 0.);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 60px;
+}

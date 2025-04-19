@@ -6,7 +6,7 @@ import type { ChangeEvent, FormEvent } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
-
+import '../styles/modal.css';
 import Auth from '../utils/auth';
 
 const LoginForm = ({}: { handleModalClose: () => void }) => {
@@ -67,9 +67,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert
-          dismissible
-          onClose={() => setShowAlert(false)}
+        <Alert          
           show={showAlert || !!error}
           variant="danger"
         >
@@ -107,7 +105,6 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type="submit"
-          variant="success"
         >
           Submit
         </Button>

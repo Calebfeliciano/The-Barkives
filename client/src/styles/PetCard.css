@@ -13,16 +13,5 @@
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     transform: translateY(-4px);
   }
-  
-  .pet-card h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--primary, #BBACC1);
-  }
-  
-  .pet-card p {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-    line-height: 1.4;
-  }
+
   

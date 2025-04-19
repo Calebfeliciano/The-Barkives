@@ -5,6 +5,7 @@ import { QUERY_ME } from '../utils/queries';
 import { useState } from 'react';
 import PetInfo from '../components/PetInfo';
 import { AnimatePresence, motion } from 'framer-motion';
+import '../styles/SavedPets.css'; // Import your CSS styles
 
 const SavedPets = () => {
   const { loading, error, data } = useQuery(QUERY_ME);
