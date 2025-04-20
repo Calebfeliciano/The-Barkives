@@ -11,9 +11,6 @@
   --transition: all 0.3s ease-in-out;
   --font-family: 'Poppins', sans-serif;
 
-  --text-dark: #2e2e2e;
-  --text-light: #fefefe;
-  --border-radius: 1rem;
   --transition-speed: 0.3s;
 }
 
@@ -25,7 +22,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  background-color: rgba(241, 222, 222, 0.6);
+  box-shadow: var(--shadow);
 }
 
 .logo {
@@ -37,10 +35,14 @@
 body {
   font-family: var(--font-family);
   background-color: var(--light);
-  color: var(--text);
+  background-image: url("../assets/WomanDogPark.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
-  line-height: 1.6;
+  height: 100vh;
 }
   
 h1, h2, h3, h4 {
@@ -59,7 +61,7 @@ a:hover {
 }
 
 button {
-  background-color: var(--primary);
+  background-color: rgba(187, 172, 193, 0.8);
   color: var(--light);
   padding: 0.5rem 1rem;
   border: none;
@@ -67,6 +69,7 @@ button {
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: var(--transition);
+
 }
 
 button:hover {

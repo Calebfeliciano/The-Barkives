@@ -6,14 +6,16 @@ import RemovePet from '../components/RemovePet';
 import '../styles/HomePage.css'
 import { useOutletContext } from 'react-router-dom';
 
-type ContextType = { showModal: boolean};
+type ContextType = { 
+  showModal: boolean; 
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const Home: React.FC = () => {
-  const { showModal } = useOutletContext<ContextType>();
+  const { showModal, setShowModal } = useOutletContext<ContextType>();
   const loggedIn = Auth.loggedIn();
   const [showAdd, setShowAdd] = useState(false);
   const [showRemove, setShowRemove] = useState(false);
-//  const [showSelect, setShowSelect] = useState(false);
   const [hideButtons, setHideButtons] = useState(false);
 
 
@@ -43,8 +45,13 @@ const Home: React.FC = () => {
   
       {!loggedIn && !showModal && (
         <>
-          <h2>Access the Barkives!</h2>
-          <p>Log in to manage pets</p>
+          <div className="access">
+            <h2>Access the Barkives!</h2>
+            <div className="login">           
+              <p>Log in to manage pets</p>
+              <button onClick={() => setShowModal(true)}>Login</button>
+            </div>
+          </div>
         </>
       )}
     </div>
