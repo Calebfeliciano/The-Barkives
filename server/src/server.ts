@@ -13,6 +13,7 @@ import { authenticateToken } from './services/auth-service.js';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 import { fileURLToPath } from 'node:url';
+import cors from 'cors';
 
 
 const PORT = process.env.PORT || 3001;
@@ -28,6 +29,7 @@ const startApolloServer = async () => {
   await server.start();
   await db;
 
+  app.use(cors());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
