@@ -25,7 +25,7 @@ const Services = () => {
           {/* Front of the card */}
           <div className="flip-card-front">
             <h2>Add a Service</h2>
-            <Form onSubmit={handleAddService}>
+            <Form className="service-form" onSubmit={handleAddService}>
               <Form.Group className="mb-3">
                 <Form.Label>Service Name</Form.Label>
                 <Form.Control
@@ -35,18 +35,19 @@ const Services = () => {
                   onChange={(e) => setService(e.target.value)}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Add Service
-              </Button>
+              <div className="button-group">
+                <Button  type="submit">
+                  Add Service
+                </Button>
+                <Button
+                variant="secondary"
+                onClick={() => setIsFlipped(true)}
+                >
+                View Services
+                </Button>
+              </div>
             </Form>
             {showAlert && <Alert variant="success" className="mt-3">Service added!</Alert>}
-            <Button
-              variant="secondary"
-              className="mt-3"
-              onClick={() => setIsFlipped(true)}
-            >
-              View Added Services
-            </Button>
           </div>
 
           {/* Back of the card */}

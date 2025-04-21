@@ -29,11 +29,13 @@ const AppNavbar: React.FC<NavbarProps> = ({ showModal, setShowModal }) => {
               {/* Only show these links if the user is logged in */} 
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                  <Nav.Link as={Link} to='/healthcare'>Healthcare</Nav.Link>
-                  <Nav.Link as={Link} to='/services'>Services</Nav.Link>
-                  <Nav.Link as={Link} to='/calendar'>Calendar</Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <div className='nav-links'>
+                    <Nav.Link as={Link} to='/'>Home</Nav.Link>
+                    <Nav.Link as={Link} to='/healthcare'>Healthcare</Nav.Link>
+                    <Nav.Link as={Link} to='/services'>Services</Nav.Link>
+                    <Nav.Link as={Link} to='/calendar'>Calendar</Nav.Link>
+                    <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  </div>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>
