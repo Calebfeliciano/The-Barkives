@@ -105,6 +105,9 @@ const resolvers = {
       const deleted = await Appointment.findByIdAndDelete(appointmentId);
       return !!deleted;
     },
+    updateAppointment: async (_parent: any, { appointmentId, input }: any) => {
+      return await Appointment.findByIdAndUpdate(appointmentId, input, { new: true });
+    },
   },
 };
 

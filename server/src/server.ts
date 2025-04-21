@@ -1,52 +1,55 @@
 import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import cors from 'cors';
-import bodyParser from 'body-parser'; 
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from 'node:path';
+import type { Request, Response } from 'express';
+// Import the ApolloServer class
+import {
+  ApolloServer,
+} from '@apollo/server';
+import {
+  expressMiddleware
+} from '@apollo/server/express4';
+import { authenticateToken } from './services/auth-service.js';
+// Import the two parts of a GraphQL schema
+import { typeDefs, resolvers } from './schemas/index.js';
+import db from './config/connection.js';
 
-import typeDefs from './schemas/typeDefs.js';
-import resolvers from './schemas/resolvers.js';
-import { authMiddleware } from './services/auth-service.js';
-dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT || 3001;
-
-
-
-// Middleware
-const json = bodyParser.json;
-app.use(cors());
-app.use(json());
-
-// Apollo Server setup
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
-await server.start();
-app.use('/graphql', expressMiddleware(server, {
-  context: authMiddleware,
-}));
 
-// 📁 Serve React frontend in production
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const clientPath = path.join(__dirname, '../../client/dist');
+const app = express();
 
-// Serve static files from client/dist
-app.use(express.static(clientPath));
+// Create a new instance of an Apollo server with the GraphQL schema
+const startApolloServer = async () => {
+  await server.start();
+  await db;
 
-// Serve index.html on unknown routes (for React Router)
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(clientPath, 'index.html'));
-});
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🌍 Server running on http://localhost:${PORT}`);
-  console.log(`🚀 GraphQL at http://localhost:${PORT}/graphql`);
-});
+  app.use('/graphql', expressMiddleware(server as any,
+    {
+      context: authenticateToken as any
+    }
+  ));
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (_req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
+  }
+
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+  });
+
+};
+
+// Call the async function to start the server
+startApolloServer();

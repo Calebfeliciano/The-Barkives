@@ -11,7 +11,11 @@ import {
   isSameMonth,
 } from 'date-fns';
 import { GET_APPOINTMENTS } from '../utils/queries';
-import { ADD_APPOINTMENT, DELETE_APPOINTMENT } from '../utils/mutations';
+import {
+  ADD_APPOINTMENT,
+  DELETE_APPOINTMENT,
+  UPDATE_APPOINTMENT,
+} from '../utils/mutations';
 import Auth from '../utils/auth';
 import '../styles/Calendar.css';
 
@@ -21,12 +25,14 @@ export default function Calendar() {
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [time, setTime] = useState('');
   const [selectedAppointment, setSelectedAppointment] = useState<any | null>(null);
 
-  // Get user ID from token
+  // Modal state for adding appointment
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [newTime, setNewTime] = useState('');
+
   useEffect(() => {
     if (!Auth.loggedIn()) {
       navigate('/login');
@@ -35,7 +41,7 @@ export default function Calendar() {
 
     try {
       const profile: any = Auth.getProfile();
-      const id = profile?._id || profile?.data?._id; // handle both possible formats
+      const id = profile?._id || profile?.data?._id;
       if (id) {
         setUserId(id);
       } else {
@@ -50,7 +56,7 @@ export default function Calendar() {
 
   const { data, refetch } = useQuery(GET_APPOINTMENTS, {
     variables: { userId: userId || '' },
-    skip: !userId, // Skip query until we have a user ID
+    skip: !userId,
   });
 
   const appointmentsByDate: { [date: string]: any[] } = {};
@@ -66,20 +72,21 @@ export default function Calendar() {
   const [addAppointment] = useMutation(ADD_APPOINTMENT, {
     onCompleted: () => {
       refetch();
-      setTitle('');
-      setDescription('');
-      setTime('');
+      setShowAddModal(false);
+      setNewTitle('');
+      setNewDescription('');
+      setNewTime('');
     },
   });
 
   const handleAdd = async () => {
-    if (!title || !selectedDate || !time || !userId) return;
+    if (!newTitle || !selectedDate || !newTime || !userId) return;
 
     const appointmentInput = {
-      title,
-      description,
+      title: newTitle,
+      description: newDescription,
       date: selectedDate,
-      time,
+      time: newTime,
     };
 
     try {
@@ -89,12 +96,6 @@ export default function Calendar() {
           input: appointmentInput,
         },
       });
-
-      // After adding the appointment, clear form and reset selectedDate
-      setTitle('');
-      setDescription('');
-      setTime('');
-      setSelectedDate(''); // Reset selected date to allow adding appointments to other days
     } catch (error) {
       console.error('Error adding appointment:', error);
     }
@@ -102,18 +103,25 @@ export default function Calendar() {
 
   const [deleteAppointment] = useMutation(DELETE_APPOINTMENT, {
     onCompleted: () => {
-      refetch(); // Refetch appointments after deletion
-      setSelectedAppointment(null); // Reset selected appointment after deletion
+      refetch();
+      setSelectedAppointment(null);
     },
   });
-  
+
   const handleDelete = async (appointmentId: string) => {
     try {
       await deleteAppointment({ variables: { appointmentId } });
     } catch (error) {
       console.error('Error deleting appointment:', error);
     }
-  };  
+  };
+
+  const [updateAppointment] = useMutation(UPDATE_APPOINTMENT, {
+    onCompleted: () => {
+      refetch();
+      setSelectedAppointment(null);
+    },
+  });
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -173,6 +181,10 @@ export default function Calendar() {
                 !isCurrentMonth ? 'outside-month' : ''
               }`}
               onClick={() => setSelectedDate(isoDate)}
+              onDoubleClick={() => {
+                setSelectedDate(isoDate);
+                setShowAddModal(true);
+              }}
             >
               <div className="calendar-date">{format(date, 'd')}</div>
 
@@ -185,7 +197,10 @@ export default function Calendar() {
                     setSelectedAppointment(appt);
                   }}
                 >
-                  <span>{appt.title}</span>
+                  <span className="appointment-title">{appt.title}</span>
+                  <div className="appointment-time">
+                    {format(new Date(`1970-01-01T${appt.time}`), 'h:mm a')}
+                  </div>
                 </div>
               ))}
             </div>
@@ -193,46 +208,98 @@ export default function Calendar() {
         })}
       </div>
 
-      {/* Add Appointment Form */}
-      <div className="calendar-form">
-        <h4>Add Appointment</h4>
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-        />
-        <input
-          type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-        />
-        <input
-          placeholder="Appointment title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button onClick={handleAdd}>Add</button>
-      </div>
+      {/* Add Appointment Modal */}
+      {showAddModal && (
+        <div className="appointment-modal">
+          <div className="app-modal-content">
+            <h4>Add Appointment</h4>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            /> {/* Allow the user to change the date, defaulting to the selected date */}
+            <input
+              type="time"
+              value={newTime}
+              onChange={(e) => setNewTime(e.target.value)}
+            />
+            <input
+              placeholder="Appointment title"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+            />
+            <textarea
+              placeholder="Description"
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+            />
+            <button onClick={handleAdd}>Add</button>
+            <button onClick={() => setShowAddModal(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
 
-      {/* Modal/Popup for Deleting Appointment */}
+      {/* Edit/Delete Appointment Modal */}
       {selectedAppointment && (
         <div className="appointment-modal">
           <div className="app-modal-content">
-            <h4>Are you sure you want to delete this appointment?</h4>
-            <p>
-              <strong>{selectedAppointment.title}</strong>
-            </p>
-            <p>{selectedAppointment.description}</p>
-            <p>
-              {selectedAppointment.date} at {selectedAppointment.time}
-            </p>
-            <button className="app-button" onClick={() => handleDelete(selectedAppointment._id)}>Delete</button>
-            <button className="app-button" onClick={() => setSelectedAppointment(null)}>Cancel</button>
+            <h4>Edit Appointment</h4>
+            <input
+              type="date"
+              value={selectedAppointment.date}
+              onChange={(e) =>
+                setSelectedAppointment({ ...selectedAppointment, date: e.target.value })
+              }
+            />
+            <input
+              type="time"
+              value={selectedAppointment.time}
+              onChange={(e) =>
+                setSelectedAppointment({ ...selectedAppointment, time: e.target.value })
+              }
+            />
+            <input
+              placeholder="Title"
+              value={selectedAppointment.title}
+              onChange={(e) =>
+                setSelectedAppointment({ ...selectedAppointment, title: e.target.value })
+              }
+            />
+            <textarea
+              placeholder="Description"
+              value={selectedAppointment.description}
+              onChange={(e) =>
+                setSelectedAppointment({
+                  ...selectedAppointment,
+                  description: e.target.value,
+                })
+              }
+            />
+            <button
+              onClick={async () => {
+                try {
+                  await updateAppointment({
+                    variables: {
+                      appointmentId: selectedAppointment._id,
+                      input: {
+                        title: selectedAppointment.title,
+                        description: selectedAppointment.description,
+                        date: selectedAppointment.date,
+                        time: selectedAppointment.time,
+                      },
+                    },
+                  });
+                } catch (error) {
+                  console.error('Error updating appointment:', error);
+                }
+              }}
+            >
+              Save
+            </button>
+            <button onClick={() => handleDelete(selectedAppointment._id)}>
+              Delete Appointment
+            </button>
+            <button onClick={() => setSelectedAppointment(null)}>Cancel</button>
           </div>
         </div>
       )}
