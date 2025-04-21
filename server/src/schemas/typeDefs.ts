@@ -88,6 +88,7 @@ const typeDefs = gql`
     removePet(petId: ID!): User
     addAppointment(userId: ID!, input: AppointmentInput!): Appointment
     deleteAppointment(appointmentId: ID!): Boolean
+    updateAppointment(appointmentId: ID!, input: AppointmentInput!): Appointment
   }
 `;
 
