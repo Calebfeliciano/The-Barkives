@@ -22,14 +22,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 0px 0px 0px;
   background-color: rgba(241, 222, 222, 0.6);
-  box-shadow: var(--shadow);
+}
+
+.nav-links {
+  display: flex;
+  padding: 1.5rem;
+  
 }
 
 .logo {
   font-size: 3rem;
   font-weight: bold;
   color: var(--dark);
+
+  padding: .5rem;
 }
 
 body {

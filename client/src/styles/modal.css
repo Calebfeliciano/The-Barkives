@@ -25,6 +25,10 @@
     transition: all 0.3s ease;
 }
 
+.nav {
+    flex-wrap: nowrap;
+}
+
 .nav-pills .nav-link {
     color: var(--light);
     text-decoration: none;
