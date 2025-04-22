@@ -5,11 +5,14 @@ import AddPetForm from '../components/AddPet';
 import RemovePet from '../components/RemovePet';
 import '../styles/HomePage.css'
 import { useOutletContext } from 'react-router-dom';
+import { FaPaw } from "react-icons/fa";
+import { IconBaseProps } from 'react-icons';
 
 type ContextType = { 
   showModal: boolean; 
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 
 const Home: React.FC = () => {
   const { showModal, setShowModal } = useOutletContext<ContextType>();
@@ -31,10 +34,21 @@ const Home: React.FC = () => {
           <h2>Manage your pets</h2>
           {!hideButtons && (
             <div className="home-buttons">
-              <Link to="/savedpets"><button className="manage-btn">Select Pet</button></Link>              
-              <button onClick={() => handleButtonClick(() => setShowAdd(true))} className="manage-btn">Add Pet</button>
-              <button onClick={() => handleButtonClick(() => setShowRemove(true))} className="manage-btn">Remove Pet</button>
-            </div>
+            <Link to="/savedpets">
+              <button className="icon-button">
+                <FaPaw {...({ className: "paw-icon" } as IconBaseProps)} />
+                <span className="icon-label">Select</span>
+              </button>
+            </Link>
+            <button onClick={() => handleButtonClick(() => setShowAdd(true))} className="icon-button">
+              <FaPaw {...({ className: "paw-icon" } as IconBaseProps)} />
+              <span className="icon-label">Add</span>
+            </button>
+            <button onClick={() => handleButtonClick(() => setShowRemove(true))} className="icon-button">
+              <FaPaw {...({ className: "paw-icon" } as IconBaseProps)} />
+              <span className="icon-label">Remove</span>
+            </button>
+          </div>
           )}
           <div className="mt-4">
             {showAdd && <AddPetForm onClose={() => { setShowAdd(false); setHideButtons(false); }} />}
