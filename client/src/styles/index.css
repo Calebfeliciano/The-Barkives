@@ -42,15 +42,21 @@
 
 body {
   font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
   background-color: var(--light);
   background-image: url("../assets/WomanDogPark.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
+}
+
+
+html {
+  height: 100%;
 }
   
 h1, h2, h3, h4 {
@@ -77,7 +83,6 @@ button {
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: var(--transition);
-
 }
 
 button:hover {

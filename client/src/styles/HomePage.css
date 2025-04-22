@@ -9,9 +9,13 @@
 }
 
 .home-container h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
     margin-bottom: 1rem;
+    color: var(--light);
+    background-color: rgba(84, 86, 67, 0.7);;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .access {
@@ -73,18 +77,12 @@
 
 .home-buttons {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     padding: 2rem;
-}
+  }
 
-.manage-btn {
-    width: 300px;
-    height: 400px;
-    font-size: 1.5rem;
-}
 
 /* Add Pet Form */
 
@@ -130,4 +128,112 @@
     background-color: rgba(144, 149, 128, 0.);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin-top: 60px;
+}
+
+/* Icon paw button container */
+.icon-button {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(84, 86, 67, 0.7);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Hover scale effect */
+  .icon-button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Paw icon itself */
+  .paw-icon {
+    font-size: 12rem;
+    color: var(--primary);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  /* Label text centered inside paw */
+  .icon-label {
+    position: absolute;
+    top: 65%; /* moved slightly lower from 50% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--light);
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  /* === Responsive styles === */
+@media (max-width: 1024px) {
+    .icon-button {
+      width: 160px;
+      height: 160px;
+    }
+  
+    .paw-icon {
+      font-size: 9rem;
+    }
+  
+    .icon-label {
+      font-size: 1.25rem;
+    }
+  
+    .home-buttons {
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  }
+  
+@media (max-width: 600px) {
+  .icon-button {
+    width: 120px;
+    height: 120px;
+  }
+
+  .paw-icon {
+    font-size: 6rem;
+  }
+
+  .icon-label {
+    font-size: 1rem;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+.navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+}
+.nav-links {
+  flex-direction: row;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+    .logo {
+  font-size: 2rem;
+}
+.container {
+  padding: 0.5rem;
+}
+.card {
+  font-size: 1rem;
+  padding: 0.75rem;
+}
+button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+    
 }
