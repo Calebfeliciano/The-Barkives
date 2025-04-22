@@ -54,8 +54,8 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Navbar showModal={showModal} setShowModal={setShowModal}/>
-      <Outlet context={{ showModal }} />
+      <Navbar showModal={showModal} setShowModal={setShowModal} />
+      <Outlet context={{ showModal, setShowModal }} />
     </ApolloProvider>
   );
 }
