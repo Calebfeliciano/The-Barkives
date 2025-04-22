@@ -60,19 +60,19 @@ The Barkives is accessible via any web browser using the link above. No installa
 
 The Barkives can be accessed via a web browser or run locally. Follow the installation steps above to set up the local environment. Note that the GraphQL server runs on port 3001, while the Vite development server runs on port 3000.
 
-1. Visit the application link to access The Barkives home page, as shown below:
-
-   ![Barkives home page](./assets/home.png)
+1. Visit the application link to access The Barkives home page.
 
 2. Create an account by clicking the "Login/Sign Up" button.
 
-3. After signing up, you'll be logged in automatically. Add pets to your database by clicking "Add Pet". Fill out your pet's information, then hit "Save" to save the pet to the database.
+3. After signing up, you'll be logged in automatically. Add pets to your database by clicking "Add". Fill out your pet's information, then hit "Save" to save the pet to the database.
 
-4. Select a pet by clicking "Select Pet" and choosing a pet from the list.
+   ![Barkives home page](./assets/home.png)
+
+4. Select a pet by clicking "Select" and choosing a pet from the list.
 
 5. View detailed information about the selected pet by navigating through the tabs ("Healthcare," "Services," or "Calendar").
 
-6. To remove a pet, return to the home page via the "Home" tab, click "Remove Pet," and click "Remove" on the pet you'd like to remove.
+6. To remove a pet, return to the home page via the "Home" tab, click "Remove," and click "Remove" on the pet you'd like to remove.
 
 7. When finished, log out by clicking the "Logout" button at the top.
 
