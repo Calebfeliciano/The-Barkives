@@ -1,17 +1,28 @@
-.pet-card {
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    padding: 2rem;
-    margin: 1.5rem auto;
-    max-width: 600px;
-    color: #333;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-  }
-  
-  .pet-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    transform: translateY(-4px);
-  }
+.pet-card-container {
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin-top: 200px;
+}
 
+.pet-card {
+  background-color: rgba(241, 222, 222, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  margin: 1.5rem auto;
+  max-width: 400px;
+  color: #333;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  text-align: center;
+}
+  
+.pet-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.div .back {
+  background-color: red;
+}
   

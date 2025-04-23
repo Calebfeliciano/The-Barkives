@@ -23,7 +23,7 @@ const Services = () => {
       <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <div className="flip-card-inner">
           {/* Front of the card */}
-          <div className="flip-card-front">
+          <div className="flip-card-front" id="service-card">
             <h2>Add a Service</h2>
             <Form className="service-form" onSubmit={handleAddService}>
               <Form.Group className="mb-3">

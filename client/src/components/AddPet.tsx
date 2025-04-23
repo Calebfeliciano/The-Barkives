@@ -81,7 +81,7 @@ const AddPetForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="card p-4">
+    <form onSubmit={handleSubmit} className="card" id="pet-form">
       <h3 className="mb-4">Add a New Pet</h3>
 
       {renderInputRow('Name', 'name', 'text', false, true)}

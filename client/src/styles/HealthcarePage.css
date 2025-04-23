@@ -6,7 +6,7 @@
     perspective: 1000px;
   }
   
-  .flip-card {
+  #health-care-card {
     width: 100%;
     max-width: 600px;
     height: 400px;

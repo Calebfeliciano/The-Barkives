@@ -1,3 +1,4 @@
+
 .carousel-wrapper {
   position: relative;
   display: flex;
@@ -11,16 +12,21 @@
   display: flex;
   gap: 2rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  cursor: grab;
+  
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   padding: 2rem;
   justify-content: center;
   align-items: center;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE/Edge */
 }
 
+
+
 .pet-carousel::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome/Safari */
 }
 
 .pet-item {
@@ -48,16 +54,29 @@
   animation: glow-pulse 2s infinite;
 }
 
-@keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 20px #bbacc1cc;
+@media (max-width: 768px) {
+  .pet-carousel {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 70vh;
+    width: 100%;
   }
-  50% {
-    box-shadow: 0 0 40px #bbacc1ee;
+
+  .pet-item {
+    max-width: 90vw;
+    margin: 1rem auto;
+  }
+
+  .carousel-wrapper {
+    align-items: start;
   }
 }
+
+
   
 /* Framer Motion arrow entry animations */
+/*
 .arrow {
   position: absolute;
   top: 50%;
@@ -79,5 +98,5 @@
 .arrow.right {
   right: 1rem;
 }
-
+*/
   

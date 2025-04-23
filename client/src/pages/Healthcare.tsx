@@ -18,7 +18,7 @@ const Healthcare: React.FC = () => {
 
   return (
     <div className="healthcare-container">
-      <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
+      <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} id= "health-care-card">
         <div className="flip-card-inner">
           {/* Front: General healthcare info */}
           <div className="flip-card-front">

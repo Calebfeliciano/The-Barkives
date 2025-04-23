@@ -1,6 +1,6 @@
 
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
+import { Navbar, Nav, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { IoPawOutline } from "react-icons/io5";
@@ -18,24 +18,21 @@ const AppNavbar: React.FC<NavbarProps> = ({ showModal, setShowModal }) => {
 
   return (
     <>
-      <Navbar className= "navbar">
-        <Container fluid>
+      <header className= "header">
+        
           <Navbar.Brand className='logo' as={Link} to='/'>
             The Barkives <IoPawOutline />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar'>
-            <Nav className='ms-auto'>
+          
+            <Nav className='navbar'>
               {/* Only show these links if the user is logged in */} 
               {Auth.loggedIn() ? (
                 <>
-                  <div className='nav-links'>
-                    <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                    <Nav.Link as={Link} to='/healthcare'>Healthcare</Nav.Link>
-                    <Nav.Link as={Link} to='/services'>Services</Nav.Link>
-                    <Nav.Link as={Link} to='/calendar'>Calendar</Nav.Link>
-                    <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                  </div>
+                  <NavLink to='/' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Home</NavLink>
+                  <NavLink to='/healthcare' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Healthcare</NavLink>
+                  <NavLink to='/services' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Services</NavLink>
+                  <NavLink to='/calendar' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Calendar</NavLink>
+                  <Nav.Link onClick={Auth.logout} className='nav-link'>Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>
@@ -43,9 +40,9 @@ const AppNavbar: React.FC<NavbarProps> = ({ showModal, setShowModal }) => {
                 </Nav.Link>
               )}
             </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+          
+        
+      </header>
 
       {/* Login/Signup Modal */}
       <Modal

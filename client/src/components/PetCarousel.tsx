@@ -25,21 +25,13 @@ const PetCarousel: React.FC<PetCarouselProps> = ({ pets }) => {
     if (isHovered || isTouchDevice || !scrollRef.current) return;
 
     const interval = setInterval(() => {
-      scrollRef.current!.scrollLeft += 1; // Adjust speed as needed
+      scrollRef.current!.scrollLeft += 1.5; // Adjust speed as needed
     }, 20);
 
     return () => clearInterval(interval);
   }, [isHovered, isTouchDevice]);
 
-  const handleScroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const amount = scrollRef.current.clientWidth * 0.5;
-      scrollRef.current.scrollBy({ 
-        left: direction === "left" ? -amount : amount, 
-        behavior: "smooth" 
-      });
-    }
-  };
+
 
   return (
     <div className="carousel-wrapper">
@@ -63,14 +55,6 @@ const PetCarousel: React.FC<PetCarouselProps> = ({ pets }) => {
           </motion.div>
         ))}
       </div>
-
-      {/* Arrow controls only on desktop & hover */}
-      {!isTouchDevice && isHovered && (
-        <>
-          <button className="arrow left" onClick={() => handleScroll("left")}>&lt;</button>
-          <button className="arrow right" onClick={() => handleScroll("right")}>&gt;</button>
-        </>
-      )}
     </div>
   );
 };
