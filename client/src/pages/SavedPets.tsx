@@ -42,7 +42,7 @@ const SavedPets = () => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.4 }}
           >
-            <button onClick={() => setSelectedPet(null)}>Back to Saved Pets</button>
+            <button className="back"onClick={() => setSelectedPet(null)}>Back to Saved Pets</button>
             <PetInfo petId={selectedPet} />
           </motion.div>
         ) : (

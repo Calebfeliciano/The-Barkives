@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+.calendar-header h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--tertiary);
+}
+
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

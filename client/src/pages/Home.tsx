@@ -59,11 +59,13 @@ const Home: React.FC = () => {
   
       {!loggedIn && !showModal && (
         <>
-          <div className="access">
-            <h2>Access the Barkives!</h2>
-            <div className="login">           
-              <p>Log in to manage pets</p>
-              <button onClick={() => setShowModal(true)}>Login</button>
+          <div className="welcome">
+            <div className="access">
+              <h2>Access the Barkives!</h2>
+              <div className="login">           
+                <p>Log in to manage pets</p>
+                <button onClick={() => setShowModal(true)}>Login</button>
+              </div>
             </div>
           </div>
         </>

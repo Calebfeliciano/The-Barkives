@@ -1,13 +1,9 @@
 .home-container {
-    /*
     display: flex;
     flex-direction: column;
-    */
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 70vh
-
+    height: 100%;
 }
 
 .home-container h2 {
@@ -58,6 +54,7 @@
     text-align: center;
     margin-bottom: 1rem;
 }
+
 .login p {
     font-size: 1.2rem;
     text-align: center;
@@ -177,7 +174,13 @@
   }
 
   /* === Responsive styles === */
-@media (max-width: 1024px) {
+@media (max-width: 980px) {
+    .home-container {
+      height: auto;
+      width: auto;
+      margin-top: 200px;
+    }
+
     .icon-button {
       width: 160px;
       height: 160px;
@@ -195,9 +198,10 @@
       flex-wrap: wrap;
       gap: 2rem;
     }
-  }
+}
   
 @media (max-width: 600px) {
+
   .icon-button {
     width: 120px;
     height: 120px;
@@ -215,30 +219,27 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-}
-.navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.5rem 1rem;
-}
-.nav-links {
-  flex-direction: row;
-  padding: 0.5rem 0;
-  width: 100%;
-}
-    .logo {
-  font-size: 2rem;
-}
-.container {
-  padding: 0.5rem;
-}
-.card {
-  font-size: 1rem;
-  padding: 0.75rem;
-}
-button {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.9rem;
-}
+  }
+
+  .home-container {
+    
+    height: auto;
+    margin-top: 100px;
+  }
+
+  .home-container h2 {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  
+  .card {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }  
+
+  button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
     
 }
